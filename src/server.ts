@@ -59,6 +59,7 @@ app.get('/logout', api.logout);
 app.post('/login', api.login);
 
 app.get('/', ngApp);
+app.get('/homepage', ngApp);
 
 app.get('*', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
