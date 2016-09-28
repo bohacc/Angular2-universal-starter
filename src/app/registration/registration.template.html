@@ -1,0 +1,399 @@
+<div class="site_subpage_content n-space-top n-space-bottom">
+  <h1 *ngIf="type==1" class="page_title">Registrace</h1>
+  <form method="post" class="registration_form" (ngSubmit)="save()">
+    <section *ngIf="type==1">
+      <h2>Přihlašovací údaje</h2>
+      <div class="lui_form"> <!--formGroupName="loginGroupForm"-->
+        <div class="item row va-middle">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <label class="label required">Login:</label>
+          </div>
+          <div class="col-xs-12 col-lg-5">
+            <div class="input">
+              <input type="text" name="login" [(ngModel)]="user.login" [disabled]="user.isLogged" [required]="!user.isLogged" />
+            </div>
+          </div>
+        </div>
+        <div class="item row va-middle" *ngIf="!user.isLogged">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <label class="label required">Heslo:</label>
+          </div>
+          <div class="col-xs-12 col-lg-5">
+            <div class="input">
+              <input type="password" name="password" [(ngModel)]="user.password" [required]="!user.isLogged" />
+            </div>
+          </div>
+        </div>
+        <div class="item row va-middle" *ngIf="!user.isLogged">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <label class="label required">Potvrdit heslo:</label>
+          </div>
+          <div class="col-xs-12 col-lg-5">
+            <div class="input">
+              <input type="password" name="confirmPassword" [(ngModel)]="user.confirmPassword" [required]="!user.isLogged" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>Fakturační údaje</h2>
+      <!-- ///// -->
+      <div class="lui_form">
+
+        <div> <!--formGroupName="invoiceGroupForm"-->
+
+          <!--FOR ORDER-->
+          <div class="item row va-middle" *ngIf="!user.isLogged && type==2">
+            <div class="col-xs-12 col-lg-5 ml-lg-3">
+              <div class="item_opens">
+                <input type="checkbox" id="want_register" name="want_register" [(ngModel)]="user.saveAsNewUser" />
+                <label for="want_register" class="secondary order_w_register_toggle">
+                  Chci se zároveň registrovat
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="order_w_register_inputs" *ngIf="user.saveAsNewUser && type==2">
+            <!-- ///// -->
+            <div class="item row va-middle">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                <label class="label required">Heslo:</label>
+              </div>
+              <div class="col-xs-12 col-lg-5">
+                <div class="input">
+                  <input type="password" name="user[password]" [(ngModel)]="user.password" />
+                </div>
+              </div>
+            </div>
+            <!-- ///// -->
+            <div class="item row va-middle">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                <label class="label required">Potvrdit heslo:</label>
+              </div>
+              <div class="col-xs-12 col-lg-5">
+                <div class="input">
+                  <input type="password" name="user[password_confirm]" [(ngModel)]="user.confirmPassword" />
+                </div>
+              </div>
+            </div>
+            <!-- ///// -->
+          </div>
+          <!--END FOR ORDER-->
+
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">Jméno:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="firstName" [(ngModel)]="user.firstName" required />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">Příjmení:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="lastName" [(ngModel)]="user.lastName" required />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">E-mail:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="email" [(ngModel)]="user.email" reqiured />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">Telefon:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="phone" [(ngModel)]="user.phone" />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">Město:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="city" [(ngModel)]="user.city" />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">Ulice:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="street" [(ngModel)]="user.street" />
+              </div>
+            </div>
+          </div>
+          <!-- ///// -->
+          <div class="item row va-middle">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+              <label class="label required">PSČ:</label>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+              <div class="input">
+                <input type="text" name="zip" [(ngModel)]="user.zip" />
+              </div>
+            </div>
+          </div>
+          <br />
+
+        </div>
+        <!-- ///// -->
+
+        <div class="item row va-middle"> <!--formGroupName="companyGroupForm"-->
+          <div class="col-xs-12">
+            <div class="item_opens as_form_item border_top">
+              <input type="checkbox" id="company_info" name="toCompany" [(ngModel)]="user.toCompany">
+              <label for="company_info" class="secondary">
+                Firemní údaje
+              </label>
+              <div class="content">
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Firma:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="company[name]" [(ngModel)]="user.companyName" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">IČ:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="company[ic]" [(ngModel)]="user.regId" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">DIČ:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="company[dic]" [(ngModel)]="user.vatId" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="item row va-middle"> <!--formGroupName="deliveryGroupForm"-->
+          <div class="col-xs-12">
+            <div class="item_opens as_form_item border_top">
+              <input type="checkbox" id="delivery_different" name="deliveryIsNotInvoice" [(ngModel)]="user.deliveryIsNotInvoice">
+              <label for="delivery_different" class="secondary">
+                Dodací adresa je jiná než fakturační
+              </label>
+              <div class="content">
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Jméno:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[firstName]" [(ngModel)]="user.firstName" disabled />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Příjmení:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[lastName]" [(ngModel)]="user.lastName" disabled />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Firma:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[companyName]" [(ngModel)]="user.companyNameDelivery" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Město:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[city]" [(ngModel)]="user.cityDelivery" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">Ulice:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[street]" [(ngModel)]="user.streetDelivery" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+                <div class="item row va-middle">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <label class="label">PSČ:</label>
+                  </div>
+                  <div class="col-xs-12 col-lg-5">
+                    <div class="input">
+                      <input type="text" name="delivery[postal]" [(ngModel)]="user.zipDelivery" />
+                    </div>
+                  </div>
+                </div>
+                <!-- ///// -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="item row va-middle">
+          <div class="col-xs-12">
+            <div class="item_opens as_form_item border_top">
+              <input type="checkbox" id="newsletter_list" class="newsletter_cats_toggle" name="newsletter" [(ngModel)]="user.newsletter" />
+
+              <label for="newsletter_list" class="secondary">
+                Souhlasím se zasíláním novinek
+              </label>
+              <!--<div class="content opened">
+                &lt;!&ndash; ///// &ndash;&gt;
+                <div class="item row va-middle">
+                  <div class="col-12">
+                    <div class="lui_check_list inline newsletter_cats_inputs">
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat1]" value="1" checked />
+                          <span>Kategorie 1</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat2]" value="1" checked />
+                          <span>Kategorie 2</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat3]" value="1" checked />
+                          <span>Kategorie 3</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat4]" value="1" checked />
+                          <span>Kategorie 4</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat5]" value="1" checked />
+                          <span>Kategorie 5</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat6]" value="1" checked />
+                          <span>Kategorie 6</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat7]" value="1" checked />
+                          <span>Kategorie 7</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat8]" value="1" checked />
+                          <span>Kategorie 8</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat9]" value="1" checked />
+                          <span>Kategorie 9</span>
+                        </label>
+                      </div>
+                      <div>
+                        <label class="lui_check space info">
+                          <input type="checkbox" name="newsletter[cat10]" value="1" checked />
+                          <span>Kategorie 10</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="item row va-middle" *ngIf="type==2">
+          <h2 class="noborder">Poznámka</h2>
+          <div class="lui_form">
+            <div class="item row va-middle">
+              <div class="col-xs-12 col-lg-12">
+                <div class="input">
+                  <textarea cols="40" rows="10" name="order[note]" [(ngModel)]="user.note"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ///// -->
+        <div class="item row va-middle" *ngIf="type==1">
+          <div class="col-12">
+            <button type="submit" class="lui_button warning" *ngIf="!user.isLogged" [disabled]="inProcess">Registrovat</button>
+            <button type="submit" class="lui_button warning" *ngIf="user.isLogged" [disabled]="inProcess">Uložit</button>
+            <div class="required_label_info inline">Položky označené <span>*</span> je nutné vyplnit</div>
+          </div>
+        </div>
+      </div>
+      <!-- ///// -->
+    </section>
+  </form>
+</div>

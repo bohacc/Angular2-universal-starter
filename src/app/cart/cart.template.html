@@ -1,0 +1,165 @@
+<div class="site_order_content">
+  <table class="basket_order_products">
+    <thead>
+    <tr>
+      <th colspan="2">Zboží</th>
+      <th>Počet</th>
+      <th>Dostupnost</th>
+      <th><span>Cena za kus</span></th>
+      <th>Sleva</th>
+      <th><span>Cena za kus</span><br /><span>vč.&nbsp;slevy</span></th>
+      <th><span>Cena celkem</span><br /><span>bez DPH vč. slevy</span></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- //// -->
+    <tr *ngFor="let item of cartObj.records">
+      <td class="image">
+        <img src="/files/{{item.fileName}}" alt="{{item.name}}">
+      </td>
+      <td>
+        <h2>
+          <a [routerLink]="[item.redirect]">{{item.name}}</a>
+        </h2>
+      </td>
+      <td data-title="Počet:">
+        <form action="" method="post" name="products">
+          <div class="ui_input_number">
+            <input type="text" name="amount" [(ngModel)]="item.amount" (ngModelChange)="updateItem(item)" />
+            <button type="button" class="minus" (click)="decAmount(item)" [disabled]="inProcess">-</button>
+            <button type="button" class="plus" (click)="incAmount(item)" [disabled]="inProcess">+</button>
+          </div>
+        </form>
+      </td>
+      <td data-title="Dostupnost:">
+        <div class="store positive">
+          {{item.availability}}
+        </div>
+      </td>
+      <td data-title="Cena za kus:">
+        {{item.price | number:formatNumber1}} Kč
+      </td>
+      <td data-title="Sleva:">
+        {{item.discountPercent}}%
+      </td>
+      <td data-title="Cena za kus vč. slevy:">
+         Kč
+      </td>
+      <td data-title="Cena celkem bez DPH vč. slevy:">
+        <strong>{{item.priceAmount | number:formatNumber1}} Kč</strong>
+      </td>
+      <td>
+        <a href="javascript:void(0);" (click)="removeItem(item)" class="remove fa_b_times" title="Odstranit z košíku"></a>
+      </td>
+    </tr>
+    <!-- //// -->
+    </tbody>
+  </table>
+  <!-- ///// -->
+  <div class="basket_order_extras">
+    <!-- ///// -->
+    <div class="item">
+      <input type="checkbox" id="add_product" name="addProduct">
+      <label for="add_product">Přidat zboží</label>
+      <div class="content">
+        <form action="" method="post" class="lui_form" name="product" (ngSubmit)="buy()">
+          <div class="container fluid nospace">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-lg-auto">
+                <div class="row va-center item">
+                  <div class="col-xs-12 col-sm-12 col-lg-auto">
+                    <label class="label nospace sm-block">
+                      Objednací kód
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-lg-auto">
+                    <div class="input">
+                      <input type="text" name="product_code" [(ngModel)]="otherProduct['code']" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-lg-auto">
+                <div class="row va-center item">
+                  <div class="col-xs-12 col-sm-12 col-lg-auto">
+                    <label class="label nospace sm-block">
+                      Počet kusů
+                    </label>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-lg-auto">
+                    <div class="ui_input_number">
+                      <input type="text" [(ngModel)]="otherProduct['amount']" name="product_amount" />
+                      <button type="button" class="minus" (click)="decAmount(otherProduct)" [disabled]="inProcess">-</button>
+                      <button type="button" class="plus" (click)="incAmount(otherProduct)" [disabled]="inProcess">+</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-lg-auto">
+                <div class="row va-center item">
+                  <div class="col-12">
+                    <button type="submit" class="lui_button warning" [disabled]="inProcess">Přidat do košíku</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ///// -->
+    <div class="item">
+      <input type="checkbox" id="add_voucher" name="addVoucher" [(ngModel)]="showCoupons">
+      <label for="add_voucher">Mám slevový poukaz</label>
+      <div class="content">
+        <form action="" method="post" class="lui_form" name="voucher" (ngSubmit)="onCoupon()">
+          <div class="container fluid nospace">
+            <div class="row va-center item">
+              <div class="col-xs-12 col-lg-auto">
+                <label class="label nospace md-block">
+                  Kód poukazu
+                </label>
+              </div>
+              <div class="col-xs-12 col-lg-auto">
+                <div *ngIf="existCoupons">{{existCoupons}} - {{coupon.name}} - {{coupon.price}}</div>
+                <div class="input" *ngIf="!existCoupons">
+                  <input type="text" name="voucher_code" [(ngModel)]="coupon.code">
+                </div>
+              </div>
+              <div class="col-xs-12 col-lg-auto">
+                <div class="row va-center item">
+                  <div class="col-12">
+                    <button type="submit" class="lui_button warning" [disabled]="inProcess" *ngIf="!existCoupons">Použít</button>
+                    <button type="submit" class="lui_button warning" [disabled]="inProcess" *ngIf="existCoupons">Odstranit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ///// -->
+  </div>
+  <!-- ///// -->
+  <div class="basket_prices_box">
+    <div class="price secondary">
+      Cena celkem bez DPH
+      <span>{{cartObj.priceAmount | number:formatNumber1}} Kč</span>
+    </div>
+    <div class="price primary">
+      Cena celkem s DPH
+      <span>{{cartObj.priceAmountVat | number:formatNumber1}} Kč</span>
+    </div>
+    <div class="free_delivery">
+      Do dopravy <strong>ZDARMA</strong> zbývá <span>{{cartObj.leftToShippingFree | number:formatNumber1}} Kč</span>
+    </div>
+  </div>
+  <div class="order_actions">
+    <a [routerLink]="['/']" class="lui_button prev light fa_b_chevron-left mobile_big">Zpět do obchodu</a>
+    <a href="javascript:void(0);" (click)="next()" class="lui_button next bold info fa_a_chevron-right mobile_big">Pokračovat</a>
+  </div>
+
+</div>

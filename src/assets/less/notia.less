@@ -1,0 +1,313 @@
+@import "router.less";
+
+/* DEFAULT */
+.hide {
+  display: none;
+}
+
+.n-white{
+  background-color: #fff !important;
+}
+
+/* Object separation */
+.design_article > .site_subpage_content {
+  padding: 0;
+  }
+.design_article >  .n-space-top {
+  padding-top: 15px !important;
+}
+.design_article >  .n-space-bottom {
+  padding-bottom: 15px !important;
+}
+
+
+/*
+
+SHOP FILTER CONTENT
+
+*/
+
+.shop_filter .content .inside .item {
+  float: left;
+  padding: 0 20px 15px 0;
+
+  @media (max-width:@grid_sm_end){
+    float: none;
+    padding-bottom: 0;
+    width: 100%;
+  }
+}
+.shop_filter .content .inside .item .title {
+  .font.open-sans.bold();
+  font-size: 16px;
+  color: #31434f;
+  @media (min-width:@grid_md_start){
+    &.center {
+      text-align: center;
+    }
+  }
+}
+
+.shop_filter .content .inside .item .values {
+  padding: 5px 0 0 0;
+}
+// JQUERY SLIDER
+.shop_filter .content .inside .item .values    .slider {
+  position: relative;
+  width: 400px;
+  height: 45px;
+  padding: 0 70px;
+
+  @media (max-width:@grid_sm_end){
+    width: 100%;
+  }
+}
+.shop_filter .content .inside .item .values      input.min,
+.shop_filter .content .inside .item .values input.max {
+  position: absolute;
+  top: 0;
+  width: 55px;
+  height: 40px;
+  background: none;
+  border: 0;
+
+  font-family: inherit;
+  font-size: 16px;
+  color: #31434f;
+
+  &.min {
+    left: 0;
+    text-align: right;
+  }
+
+  &.max {
+    right: 0;
+    text-align: left;
+  }
+}
+
+.shop_filter .content .inside .item .values .ui-slider {
+  position: relative;
+  height: 40px;
+
+  &:before {
+    position: absolute;
+    top: 17px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: rgba(0,0,0,0.1);
+    content: "";
+  }
+
+  .ui-slider-range {
+    position: absolute;
+    top: 17px;
+    background: #1a7cc6;
+    height: 5px;
+  }
+
+  .ui-slider-handle {
+    display: block;
+    position: absolute;
+    top: 9px;
+    width: 20px;
+    height: 20px;
+    margin-left: -11px;
+    background: #1a7cc6;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid #e9f1f9;
+  }
+}
+
+
+    // CHECKLIST
+    .checklist {
+      .lui.clear.after();
+
+      & > .option {
+        float: left;
+        margin: 0 5px 5px 0;
+        cursor: pointer;
+
+        input {
+          display: none;
+        }
+
+        & > .value {
+          position: relative;
+          padding: 8px 13px;
+          border: 1px solid #d1e2f1;
+          background: white;
+          font-size: 16px;
+          color: #505050;
+
+          &:hover {
+            border-color: #1a7cc6;
+          }
+
+          &.color {
+            color: white;
+            text-shadow: 1px 1px 2px black;
+          }
+
+          &.red {
+            background: #e2001a;
+          }
+
+          &.green {
+            background: #41a62a;
+          }
+
+          &.blue {
+            background: #006ab3;
+          }
+
+          &.k2200 {
+            background: #fff685;
+          }
+
+          &.k2700 {
+            background: #fff9ae;
+          }
+
+          &.k3000 {
+            background: #fffcd5;
+          }
+
+          &.k4000 {
+            background: #ffffff;
+          }
+
+          &.k5400 {
+            background: #e1f4fd;
+          }
+
+          &.k6400 {
+            background: #abe1fa;
+          }
+
+          &.rgb {
+            background: linear-gradient(to right, #e2001a 0%,#e2001a 33%,#e2001a 33%,#41a62a 33%,#41a62a 66%,#41a62a 66%,#006ab3 66%,#006ab3 66%,#006ab3 100%);
+          }
+
+          &.rgbw {
+            background: linear-gradient(to right, #e2001a 0%,#e2001a 25%,#41a62a 25%,#41a62a 50%,#006ab3 50%,#006ab3 50%,#006ab3 75%,#ffffff 75%);
+          }
+
+          & > .image {
+            float: left;
+            width: 40px;
+            height: 38px;
+            margin: -8px 2px -8px -11px;
+
+            .lui.flexbox.block();
+            .lui.flexbox.flex-direction(row);
+            .lui.flexbox.flex-wrap(nowrap);
+            .lui.flexbox.justify-content(center);
+            .lui.flexbox.align-content(stretch);
+            .lui.flexbox.align-items(center);
+
+
+            div {
+              max-width: 40px;
+              max-height: 38px;
+
+              img {
+                display: block;
+                margin: 0 auto;
+                max-width: 40px;
+                max-height: 38px;
+              }
+            }
+          }
+        }
+
+        input:checked ~ .value {
+          border-color: #1a7cc6;
+          box-shadow: inset 0 0 1px 1px #1a7cc6;
+
+          &:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10px;
+            line-height: 12px;
+            padding: 0 1px;
+            font-family: FontAwesome;
+            content: "\f00c";
+            color: white;
+            background: #1a7cc6;;
+          }
+        }
+      }
+    }
+
+    // SELECT
+    .select {
+      margin: 0 5px 5px 0;
+    }
+
+
+/* SEZNAM */
+.n-tab-background {
+  background-color: #e9f1f9;
+  height: 20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: -20px;
+}
+
+/* SEZNAM */
+.products_list .empty_row
+{
+  padding-bottom: 25px;
+}
+
+/* SEZNAM 3 */
+.products_list .item  a.detail {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: block;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  background: url(/images/theme/products_list_detail.png) center no-repeat #0062ab;
+  .lui.transition.this(150ms);
+
+  @media (max-width:@grid_sm_end){
+    bottom: 25px;
+  }
+
+  &:hover {
+    background-color: #bd9a2b;
+  }
+}
+
+/* SEZNAM 4 */
+.products_list .item  a.choice {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: block;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  background: url(/images/theme/products_list_choice.png) center no-repeat #0062ab;
+  .lui.transition.this(150ms);
+
+  @media (max-width:@grid_sm_end){
+    bottom: 25px;
+  }
+
+  &:hover {
+    background-color: #bd9a2b;
+  }
+}
+
+/* test, melo by ovlivnit pouze rozcestnik produktu  */
+.shop_categories_router > .item > .inside h2 {
+  text-transform: none !important;
+}

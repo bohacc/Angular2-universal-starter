@@ -1,0 +1,13 @@
+<div class="downloads_list simple">
+  <span *ngIf="loading">Nahrávám přílohy...</span>
+  <div class="item" *ngFor="let item of items">
+    <div class="icon">
+      <div>
+        <img [src]="item.imgType" alt="{{item.name}}" />
+      </div>
+    </div>
+    <h2 class="filename">
+      <a href="/attachments/{{item.id}}" onclick="window.open(this.href); return false">{{item.name}} <small>({{item.ext}} / {{item.size | number:'1.0-3'}}MB)</small></a>
+    </h2>
+  </div>
+</div>

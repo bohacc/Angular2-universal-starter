@@ -1,0 +1,52 @@
+<div class="item">
+    <div class="title">
+        Patice
+    </div>
+    <div class="values">
+        <div class="checklist">
+            <label class="option">
+                <input type="checkbox" (click)="onSelectItem({id: 'MC000001:G13', name: 'G13', val: 'MC000001:G13'})" />
+                <div class="value">
+                    <div class="image">
+                        <div>
+                            <img src="/images/filter/filter_g13.png" alt="g13" />
+                        </div>
+                    </div>
+                    G13
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+<!-- //////////////// -->
+<div class="item">
+    <div class="title">
+        Barvy
+    </div>
+    <div class="values">
+        <div class="checklist">
+            <label class="option">
+                <input type="checkbox" (click)="onSelectItem({id: 'EF000103:4000', name: '4000', val: 'EF000103:4000'})" />
+                <div class="value color k4000">
+                    4000K
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
+<!-- //////////////// -->
+<div class="item">
+    <div class="title">
+        Typ trubice
+    </div>
+    <div class="values">
+        <div class="select" select-box [items]="itemsComboBox" [defaultItem]="defaultItem" (onSelectItem)="onSelectItemComboBox('MC000023', $event)">
+            <!--<select class="make_lui_select" make-lui-select>
+                &lt;!&ndash;<option>MC000023</option>&ndash;&gt;
+                <option>T8 120 cm</option>&lt;!&ndash;{id: 'MC000023', name: '', val: 'T8 120 cm'}&ndash;&gt;
+                <option>T8 150 cm</option>&lt;!&ndash;{id: 'MC000023', name: '', val: 'T8 150 cm'}&ndash;&gt;
+                <option>T8 60 cm</option>&lt;!&ndash;{id: 'MC000023', name: '', val: 'T8 60 cm'}&ndash;&gt;
+            </select>-->
+        </div>
+    </div>
+</div>
