@@ -2,18 +2,16 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { Home } from './home/home.component';
-import { HomeStatic } from "./home-static/home-static.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   {
     path: 'homepage',
-    component: HomeStatic,
+    component: Home,
     data: {
-      title: 'McLed'
+      title: 'Amed'
     }
   },
-  { path: ':code', component: Home },
 ];
 
 export const appRoutingProviders: any[] = [

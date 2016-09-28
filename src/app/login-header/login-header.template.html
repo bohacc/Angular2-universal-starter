@@ -1,6 +1,0 @@
-<ul>
-  <li><a *ngIf="isLogged" [routerLink]="['/registrace']" class="user fa_b_user" title="{{loginName}}"><span>{{loginName}}</span></a></li>
-  <li><a *ngIf="!isLogged" [routerLink]="['/login']" class="fa_b_user" title="Uživatel">Přihlásit se</a></li>
-  <li><a *ngIf="isLogged" href="javascript:void(0);" class="logout fa_b_times" (click)="logout()">Odhlásit</a></li>
-  <li><a [routerLink]="['/']" class="lang cz">Česky</a></li>
-</ul>
