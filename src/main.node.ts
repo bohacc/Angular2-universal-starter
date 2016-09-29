@@ -21,9 +21,9 @@ import {Home} from "./app/home/home.component";
     UniversalModule, // NodeModule, NodeHttpModule, and NodeJsonpModule are included
     FormsModule,
     routing,
-    //AlertModule,
-    //DatepickerModule,
-    //DropdownModule
+    AlertModule,
+    DatepickerModule,
+    DropdownModule
   ],
   providers: [
     appRoutingProviders,
