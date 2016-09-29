@@ -239,7 +239,7 @@ export function login (req, res) {
 export function sessionidCookie (req, res, next) {
   let sql, vals = {};
   try {
-    if (!Tools.getSessionId(res)) {
+    if (!Tools.getSessionId(req)) {
       sql =
         'SELECT ' +
         '  encrypt_cookie(seq_sessionid_nbs.nextval) as "sessionid" ' +
@@ -257,6 +257,7 @@ export function sessionidCookie (req, res, next) {
           next();
         }
       );
+      next();
     } else {
       next();
     }

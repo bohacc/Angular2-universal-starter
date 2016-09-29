@@ -2,53 +2,31 @@ var webpack = require('webpack');
 var path = require('path');
 var resolveNgRoute = require('@angularclass/resolve-angular-routes');
 
+function root(args) {
+  args = Array.prototype.slice.call(arguments, 0);
+  return path.join.apply(path, [__dirname].concat(args));
+}
 
 var commonConfig = {
   resolve: {
-    extensions: ['', '.ts', '.js', '.json'],
-    alias: {
-      "jqueryUI": "query-ui", //-1.12.0-rc.2
-      "jQuery": "jquery",
-      "jquery": "jquery",
-      "slidesjs": path.join(__dirname, "D:/Martin/projects/angular-universal/tools/js/jquery/slideshow")
-    }
+    extensions: ['.ts', '.js', '.json'],
   },
   module: {
-    preLoaders: [
-    ],
     loaders: [
       // TypeScript
       { test: /\.ts$/, loaders: ['ts-loader', 'angular2-template-loader'] },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.css$/, loader: 'raw-loader' },
       { test: /\.json$/, loader: 'raw-loader' },
-      { test: /D:[\\\/]notia[\\\/]app[\\\/]web[\\\/]code[\\\/]angular2-test[\\\/]tools[\\\/]js[\\\/]jquery[\\\/]slideshow[\\\/]jquery.slides.js$/, loader: 'imports?jQuery=jquery,$=jquery,this=>window' },
-      {
-        test: /\.js$/,
-        include: [
-          path.join(__dirname, 'D:/Martin/projects/angular-universal/tools/js/jquery/slideshow')
-        ],
-        loader: 'script'
-      }
     ],
   },
   plugins: [
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
       /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
-      root('./src'),
-      resolveNgRoute(root('./src')),
-    ),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jquery: "jQuery",
-      jQuery: "jquery",
-      "windows.jQuery": "jquery",
-      'window.$': 'jquery',
-      "jqueryUI": "D:/Martin/projects/angular-universal/tools/js/jquery/jquery-ui.js",
-      "slick": "D:/Martin/projects/angular-universal/tools/js/jquery/carousel/slick.js",
-      "slidesjs": "D:/Martin/projects/angular-universal/tools/js/jquery/slideshow/jquery.slides.js",
-    })
+      root('./src'),//root
+      resolveNgRoute(root('./src')), //root
+    )
   ]
 
 };
@@ -58,7 +36,7 @@ var clientConfig = {
   target: 'web',
   entry: './src/client',
   output: {
-    path: root('dist/client')
+    path: root('dist/client') //root
   },
   node: {
     global: true,
@@ -74,7 +52,7 @@ var serverConfig = {
   target: 'node',
   entry: './src/server', // use the entry file of the node server if everything is ts rather than es5
   output: {
-    path: root('dist/server'),
+    path: root('dist/server'), // root
     libraryTarget: 'commonjs2'
   },
   externals: checkNodeImport,
@@ -93,7 +71,7 @@ var serverConfig = {
 var defaultConfig = {
   context: __dirname,
   resolve: {
-    root: root('/src')
+    //root: root('/src')//root
   },
   output: {
     publicPath: path.resolve(__dirname),
@@ -118,9 +96,4 @@ function checkNodeImport(context, request, cb) {
     cb(null, 'commonjs ' + request); return;
   }
   cb();
-}
-
-function root(args) {
-  args = Array.prototype.slice.call(arguments, 0);
-  return path.join.apply(path, [__dirname].concat(args));
 }

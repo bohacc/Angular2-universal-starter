@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 
 import { UniversalModule } from 'angular2-universal';
 
+import { AlertModule, DatepickerModule, DropdownModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 import { App } from './app/app';
 import { routing, appRoutingProviders } from './app/app.routing';
 import {Home} from "./app/home/home.component";
 
 //noinspection TypeScriptUnresolvedVariable
-let port = (parseInt(process.env.DIT_PORT, 10) || 9002);
 
 @NgModule({
   bootstrap: [ App ],
@@ -20,6 +21,9 @@ let port = (parseInt(process.env.DIT_PORT, 10) || 9002);
     UniversalModule, // NodeModule, NodeHttpModule, and NodeJsonpModule are included
     FormsModule,
     routing,
+    //AlertModule,
+    //DatepickerModule,
+    //DropdownModule
   ],
   providers: [
     appRoutingProviders,
